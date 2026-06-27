@@ -90,6 +90,4 @@ Abaixo estão as capturas de tela demonstrando a interface funcional do sistema 
 ![Formulário de Contato](./src/public/assets/screenshots/MAPA-image5.png)
 *Interface da aba Fale Conosco para suporte e envio de feedbacks.*
 
-### 6. Sistema de Validação de Erros Reativa
-![Validação de Erros](./src/public/assets/screenshots/MAPA-image6.png)
-*Feedback visual em tempo de digitação (UX premium) para formulários inconsistentes.*
+
