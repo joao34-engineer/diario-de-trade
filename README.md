@@ -16,6 +16,7 @@ Para atender aos requisitos de desempenho e compatibilidade, foram utilizadas te
 4. **Chart.js:** Biblioteca externa carregada de forma otimizada no HTML para a geração de gráficos de barras verticais e horizontais que mostram estatísticas de saldo acumulado e assertividade.
 5. **Web Storage API (LocalStorage):** Persistência de dados segura gravada localmente no disco (SSD) do usuário, garantindo que os dados não sejam perdidos ao fechar ou atualizar o navegador.
 6. **FileReader & Blob APIs:** Utilizadas para ler arquivos de texto enviados pelo usuário e gerar links temporários para o download de backups no formato JSON.
+7. **Google Fonts & Material Symbols:** Fonte moderna (*Outfit*) utilizada para tipografia premium e ícones estéticos vetoriais adotados no menu de abas.
 
 ---
 
