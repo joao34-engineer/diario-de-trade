@@ -1,0 +1,651 @@
+/* Importação da fonte moderna Outfit do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Cores de Fundo (Paleta Dark Premium de Trading) */
+    --bg-gradient: linear-gradient(135deg, #090d16 0%, #111827 50%, #0b0f19 100%);
+
+    /* Cores de Texto */
+    --text-primary: #f8fafc;
+    /* Branco Suave */
+    --text-secondary: #94a3b8;
+    /* Cinza Claro */
+    --text-muted: #556996;
+    /* Cinza Escuro */
+
+    /* Cores semânticas de Trading  */
+    --color-gain: #10b981;
+    /* Verde Esmeralda (Operações de Lucro) */
+    --color-loss: #ef4444;
+    /* Vermelho Rosa (Operações de Prejuízo) */
+    --color-accent: #6366f1;
+    /* Índigo Neon (Destaques e Botões ativos) */
+    --color-accent-hover: #4f46e5;
+
+    /* Elementos de Vidro (Glassmorphism) */
+    --glass-bg: rgba(17, 24, 39, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --glass-glow: rgba(99, 102, 241, 0.15);
+
+
+    /* Tipografia */
+    --font-main: 'Outfit', sans-serif;
+
+    /* Bordas e Sombras */
+    --border-radius-lg: 20px;
+    --border-radius-md: 12px;
+    --border-radius-sm: 8px;
+    --shadow-main: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+
+    /* Transição padrão de animação */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+/* ==========================================
+   2. RESET DE ESTILOS & LAYOUT GLOBAL
+   ========================================== */
+/* Reseta margens, preenchimentos e força o cálculo correto de tamanho de box */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    /* Remove aquele flash azul chato de clique no celular */
+
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    min-height: 100vh;
+
+    /* Flexbox para alinhar o conteúdo no topo/centro */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    /* Deixamos espaço para o menu inferior no mobile */
+    padding-bottom: 90px;
+    background-attachment: fixed;
+}
+
+/* O Container do App agora se adapta ao dispositivo:
+   No mobile ele é estreito, no desktop ele pode expandir até 1200px! */
+
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    /* Largura máxima expandida para desktop */
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* Criamos um wrapper interno para as telas de conteúdo */
+.tab-content {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+/* ==========================================
+   3. ESTILIZAÇÃO DA NAVEGAÇÃO (ABAS)
+   ========================================== */
+
+
+.tab-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    /* Efeito de Vidro Embaçado (Glassmorphism) */
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--glass-border);
+    padding: 12px 10px;
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+    transition: var(--transition-smooth);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    flex: 1;
+    transition: var(--transition-smooth);
+    padding: 6px 0;
+    border-radius: var(--border-radius-sm);
+
+}
+
+
+.tab-icon {
+    font-size: 20px;
+    transition: var(--transition-smooth);
+}
+
+
+.tab-label {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Hover (passar o mouse por cima) */
+.tab-btn:hover {
+    color: var(--text-secondary);
+}
+
+/* Estado Ativo (Botão da aba que está aberta) */
+.tab-btn.active {
+    color: var(--color-accent);
+}
+
+.tab-btn.active .tab-icon {
+    /* Dá um leve pulo e cresce o ícone ativo */
+    transform: scale(1.15) translateY(-2px);
+}
+
+/* ------------------------------------------
+   Mecanismo de Exibição das Abas (JS Helper)
+   ------------------------------------------ */
+/* Por padrão, esconde todas as abas de conteúdo */
+
+.tab-pane {
+    display: none;
+}
+
+/* Mostra apenas a aba que tiver a classe "active" */
+.tab-pane.active {
+    display: block;
+    animation: slideUpFade 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animação suave para quando a aba surgir na tela */
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   4. ESTILIZAÇÃO DO FORMULÁRIO (NOVO REGISTRO)
+   ========================================== */
+
+/* Centraliza e estiliza os títulos das abas com degradê moderno */
+.tab-pane h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(to right, #ffffff, var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+#form-registro,
+#form-contato {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 24px;
+    box-shadow: var(--shadow-main);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--border-radius-lg);
+}
+
+/* Agrupa dois campos na mesma linha (Data e Hora) */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    /* Divide o espaço igualmente */
+}
+
+/* Estrutura vertical de rótulo e input */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Estilo padrão de Inputs, Textareas e Selects */
+.form-group input,
+.form-group textarea {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 12px 16px;
+    border-radius: var(--border-radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    width: 100%;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+    /* Permite esticar apenas para baixo, nunca para os lados */
+    min-height: 80px;
+    /* Altura mínima de início */
+    max-height: 250px;
+    /* Impede o usuário de esticar demais e quebrar a página */
+}
+
+/* Efeito ao focar no campo (clicar para digitar) */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Subtexto descritivo (Ex: aviso de gain/loss) */
+.form-group small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: -2px;
+}
+
+/* ------------------------------------------
+   Seletores de Tags Rápidas
+   ------------------------------------------ */
+
+.tag-selector {
+    display: flex;
+    flex-wrap: wrap;
+    /* Faz quebrar de linha caso falte espaço no mobile */
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.tag-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 8px 14px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+
+}
+
+.tag-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+/* Estado de Tag Selecionada (Adicionado via JavaScript depois) */
+.tag-btn.selected {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--text-primary);
+    box-shadow: 0 0 12px var(--glass-glow);
+    transform: translateY(-1px);
+}
+
+/* ------------------------------------------
+   Botão de Envio (Submit)
+   ------------------------------------------ */
+
+.submit-btn {
+    width: 100%;
+    background: var(--color-accent);
+    border: none;
+    color: var(--text-primary);
+    padding: 14px;
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: var(--color-accent-hover);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   5. ESTILIZAÇÃO DO HISTÓRICO & CARDS
+   ========================================== */
+
+
+.log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+/* Estado da lista vazia */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-main);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.empty-state p {
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+
+/* ------------------------------------------
+   Estrutura do Card de Trade (Gerado pelo JS)
+   ------------------------------------------ */
+
+.trade-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-main);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: var(--transition-smooth);
+}
+
+/* Efeito ao passar o mouse por cima do card no PC */
+.trade-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.08);
+}
+
+/* Cabeçalho do Card (Data, Hora e botão de Deletar) */
+.trade-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 8px;
+}
+
+.trade-card-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+/* Linha com Região de Preço e Badge de Resultado */
+.delete-btn:hover {
+    color: var(--color-loss);
+    background: rgba(244, 63, 94, 0.1);
+}
+
+.trade-card-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trade-card-region {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Etiqueta (Badge) de Pontuação */
+.outcome-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 9999px;
+}
+
+/* Variação de Gain (Lucro) */
+.outcome-badge.gain {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--color-gain);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+}
+
+/* Variação de Loss (Prejuízo) */
+.outcome-badge.loss {
+    background: rgba(244, 63, 94, 0.12);
+    color: var(--color-loss);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.1);
+}
+
+/* Seção de Tags salvas no card */
+.trade-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.card-tag {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+}
+
+/* Caixa de Notas / Comentários do replay */
+.trade-card-notes {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.15);
+    padding: 12px;
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-accent);
+    line-height: 1.4;
+    font-style: italic;
+}
+
+/* ==========================================
+   6. RESPONSIVIDADE PARA COMPUTADORES (DESKTOP)
+   ========================================== */
+/* Aplica estas regras apenas para telas maiores que 768px */
+
+@media (min-width: 769px) {
+    body {
+        padding-bottom: 40px;
+        padding-top: 90px;
+        /* Cria espaço no topo para o menu */
+    }
+
+    /* Transfere o menu do rodapé para o topo da tela */
+    .tab-navigation {
+        bottom: auto;
+        top: 0;
+        border-top: none;
+        border-bottom: 1px solid var(--glass-border);
+        padding: 14px 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+        /* Alinha os botões no centro (estilo site convencional) */
+        justify-content: center;
+        gap: 3rem;
+
+    }
+
+    /* Muda a orientação dos botões do menu: Ícone e texto ficam lado a lado */
+    .tab-btn {
+        flex-direction: row;
+        gap: 8px;
+        padding: 8px 16px;
+        flex: none;
+        /* Impede que o botão estique para ocupar a largura toda */
+    }
+
+    .tab-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    #form-registro {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-row {
+        flex-direction: row;
+    }
+
+    /* Organiza os Gráficos lado a lado em 2 colunas */
+    .charts-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    /* Organiza o Histórico em Grid (múltiplas colunas de cards) */
+    .log-list {
+        display: grid;
+
+        /* Divide em colunas de no mínimo 320px cada, ocupando o espaço que restar */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 20px;
+    }
+
+    /* Configurações em duas colunas (ações de um lado, aviso do outro) */
+    .config-container {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 24px;
+        align-items: start;
+    }
+
+}
+
+/* ==========================================
+   8. ESTILOS DE VALIDAÇÃO DE CONTATO
+   ========================================== */
+.error-message {
+    color: var(--color-loss);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: none;
+    font-weight: 500;
+}
+
+.form-group.has-error input,
+.form-group.has-error textarea {
+    border-color: var(--color-loss);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.15);
+}
+
+.success-message {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--color-gain);
+    padding: 14px;
+    border-radius: var(--border-radius-md);
+    font-size: 0.95rem;
+    margin-top: 16px;
+    text-align: center;
+    font-weight: 600;
+    animation: slideUpFade 0.3s ease;
+}
+
+/* ==========================================
+   9. ESTILOS DO CABEÇALHO DO APP (SEO & BRANDING)
+   ========================================== */
+.app-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-top: 10px;
+}
+
+.app-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-header h1 .badge {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    padding: 2px 8px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+}

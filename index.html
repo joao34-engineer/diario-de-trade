@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day Trade Log - WDO (Tape Reading)</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Day Trade Log - Diário de trade e análise estatística de fluxo (Tape Reading) para operações de Mini-Dólar (WDO) baseado em replays de mercado.">
+  <meta name="keywords" content="day trade, mini-dolar, wdo, tape reading, fluxo, diario de trade, trading log, estatistica de trade, replay de mercado">
+  <meta name="author" content="João Marcelo">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph Meta Tags para compartilhamento social -->
+  <meta property="og:title" content="Day Trade Log - WDO (Tape Reading)">
+  <meta property="og:description" content="Gere relatórios de assertividade e gerencie seu diário de replay de mercado de forma simples e local.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://seusite.com">
+
+  <!-- Importação de fonte moderna -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap">
+
+  <!-- Link para o arquivo CSS local -->
+  <link rel="stylesheet" href="./src/public/style.css">
+
+  <!-- Biblioteca Chart.js carregada de forma otimizada para os gráficos futuros -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
+  <!-- Link para os arquivos JavaScript principais -->
+  <script src="./src/index.js" type="module"></script>
+</head>
+
+<body>
+  <!-- Container principal do nosso aplicativo -->
+  <main class="app-container">
+
+    <!-- Cabeçalho do App para Hierarquia de Títulos (SEO) -->
+    <header class="app-header">
+      <h1>Day Trade Log <span class="badge">WDO</span></h1>
+    </header>
+
+    <!-- Menu de Navegação por Abas -->
+    <nav class="tab-navigation" aria-label="Menu de navegação principal">
+      <button class="tab-btn active" data-tab="registro" aria-label="Registrar nova operação">
+        <span class="tab-icon"><img
+            src="./src/public/assets/checkbook_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Ícone de Registro"></span>
+        <span class="tab-label">Novo Registro</span>
+      </button>
+
+      <button class="tab-btn" data-tab="historico" aria-label="Visualizar histórico de operações">
+        <span class="tab-icon"><img
+            src="./src/public/assets/view_timeline_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Ícone de Histórico"></span>
+        <span class="tab-label">Histórico</span>
+      </button>
+
+      <button class="tab-btn" data-tab="graficos" aria-label="Visualizar estatísticas e gráficos">
+        <span class="tab-icon"><img class="statistics-icon"
+            src="./src/public/assets/bar_chart_4_bars_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" alt="Ícone de Estatísticas"></span>
+        <span class="tab-label">Estatisticas</span>
+      </button>
+
+      <button class="tab-btn" data-tab="config" aria-label="Configurações e backup de dados">
+        <span class="tab-icon"><img
+            src="./src/public/assets/dashboard_2_gear_25dp_FFFFFF_FILL0_wght400_GRAD0_opsz24 (1).png" alt="Ícone de Configurações"></span>
+        <span class="tab-label">Config</span>
+      </button>
+
+      <button class="tab-btn" data-tab="contato" aria-label="Acessar formulário de contato">
+        <span class="tab-icon">✉️</span>
+        <span class="tab-label">Contato</span>
+      </button>
+    </nav>
+
+    <!-- O contêiner onde cada tela de conteúdo vai aparecer -->
+    <div class="tab-content">
+
+      <!-- ABA 1: NOVO REGISTRO -->
+      <section id="pane-registro" class="tab-pane active">
+        <h2>Registrar Entrada (WDO)</h2>
+        <form id="form-registro">
+
+          <!-- Linha com Data e Hora -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-data">Data</label>
+              <input type="date" id="input-data" required>
+            </div>
+            <div class="form-group">
+              <label for="input-hora">Hora</label>
+              <input type="time" id="input-hora" required>
+            </div>
+          </div>
+
+          <!-- Linha com Região de Preço -->
+          <div class="form-group">
+            <label for="input-regiao">Regiao de preço(WDO)</label>
+            <input type="number" id="input-regiao" placeholder="Ex: 58.5" step="0.5" required>
+          </div>
+
+          <!-- Seleção de Ações do Agressor (Tags) -->
+          <div class="form-group">
+            <label>Açoes do Agressor</label>
+            <div class="tag-selector" id="agressor-selector">
+              <button type="button" class="tag-btn" data-value="Tomada Forte">Tomada Forte</button>
+              <button type="button" class="tag-btn" data-value="Batida Forte">Batida Forte</button>
+              <button type="button" class="tag-btn" data-value="Exaustão">Exaustão</button>
+              <button type="button" class="tag-btn" data-value="Absorção Ativa">Absorção Ativa</button>
+              <button type="button" class="tag-btn" data-value="Renovação de Lote">Renovação de Lote</button>
+            </div>
+          </div>
+
+          <!-- Seleção de Ações da Defesa (Tags) -->
+          <div class="form-group">
+            <label>Ação da Defesa</label>
+            <div class="tag-selector" id="defesa-selector">
+              <button type="button" class="tag-btn" data-value="Defesa Passiva(Absorção)">Defesa Passiva</button>
+              <button type="button" class="tag-btn" data-value="Defesa Ativa(contra-ataque)">Defesa Ativa</button>
+              <button type="button" class="tag-btn" data-value="Sem defesa">Sem Defesa</button>
+              <button type="button" class="tag-btn" data-value="Renovação de Fila">Renovação de Fila (iceberg)</button>
+            </div>
+          </div>
+
+          <!-- Gatilho de Confirmação (Tags) -->
+          <div class="form-group">
+            <label>Gatilho / Confirmação</label>
+            <div class="tag-selector" id="gatilho-selector">
+              <button type="button" class="tag-btn" data-value="Inversão de Fluxo">Inversão de Fluxo</button>
+              <button type="button" class="tag-btn" data-value="Entrada de Parceria">Entrada de Parceria</button>
+              <button type="button" class="tag-btn" data-value="Agressão após Absorção">Agressão pós Absorção</button>
+              <button type="button" class="tag-btn" data-value="Exaustão de Fim de Movimento">Exaustão de Fim de
+                Movimento</button>
+            </div>
+          </div>
+
+          <!-- Texto Livre para Observações Extras -->
+          <div class="form-group">
+            <label for="input-notas">Observações do Replay</label>
+            <textarea id="input-notas" rows="3"
+              placeholder="Descreva os detalhes que você observou segundos antes da entrada..."></textarea>
+          </div>
+
+          <!-- Resultado da Operação (Pontos) -->
+          <div class="form-group">
+            <label for="input-resultado">Resultado em Pontos (WDO)</label>
+            <input type="number" id="input-resultado" placeholder="Ex: +5 ou -3" step="0.5" required>
+            <small>
+              Use sinal de positivo (+) para gain e sinal negativo (-) para loss
+            </small>
+          </div>
+          <button type="submit" class="submit-btn">Salvar operação</button>
+        </form>
+      </section>
+
+      <!-- ABA 2: HISTÓRICO -->
+      <section id="pane-historico" class="tab-pane">
+        <h2>Histórico de Operações</h2>
+
+        <!-- Esse contêiner começará com uma mensagem de lista vazia -->
+        <div id="log-list" class="log-list">
+          <div class="empty-state">
+            <span class="empty-icon">📂</span>
+            <p>Nenhuma operação registrada no replay ainda</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 3: ESTATÍSTICAS & GRÁFICOS -->
+      <section id="pane-graficos" class="tab-pane">
+        <h2>
+          Análise de Padrões (WDO)
+        </h2>
+        <div class="charts-container">
+
+          <!-- Card do Gráfico 1 -->
+          <div class="chart-card">
+            <h3>
+              Resultado por Região de preço
+            </h3>
+            <div class="canvas-wrapper">
+              <canvas id="chart-regiao"></canvas>
+            </div>
+          </div>
+
+          <!-- Card do Gráfico 2 -->
+          <div class="chart-card">
+            <h3>
+              Assertividade por Comportamento (agressor)
+            </h3>
+            <div class="canvas-wrapper">
+              <canvas id="chart-comportamento"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 4: CONFIGURAÇÕES -->
+      <section id="pane-config" class="tab-pane">
+        <h2>Configurações do app</h2>
+        <div class="config-container">
+          <div class="config-card">
+            <h3>Backup de Dados (SSD)</h3>
+            <p>Como os dados ficam salvos localmente no navegador, exporte os backups
+              regularmente para não perder seus dados
+            </p>
+            <div class="config-actions">
+
+              <!-- Botão para Exportar -->
+              <button type="button" id="btn-export" class="action-btn export-btn">
+                <span>📤</span> Exportar backup (.json)
+              </button>
+
+              <!-- Input de Arquivo Invisivel (Será acionado via JS) -->
+              <input type="file" id="input-import" accept=".json" style="display:none">
+
+              <!-- Botão bonito para acionar a importação -->
+              <button type="button" id="btn-import-trigger" class="action-btn import-btn">
+                <span>📥</span> Importar backup (.json)
+              </button>
+            </div>
+          </div>
+
+          <!-- Mensagem de Aviso Importante -->
+          <div class="config-warning">
+            <span class="warning-icon">⚠️</span>
+            <p><strong>Atenção:</strong>Seus registro são mantidos localmente no SSD
+              pelo navegador. Se você limpar os dados de navegação, perderá o histórico caso
+              nao tenha feito um backup em arquivo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABA 5: CONTATO -->
+      <section id="pane-contato" class="tab-pane">
+        <h2>Fale Conosco</h2>
+        <form id="form-contato" novalidate>
+          <div class="form-group">
+            <label for="input-contato-nome">Nome Completo</label>
+            <input type="text" id="input-contato-nome" placeholder="Digite seu nome completo" required>
+            <span class="error-message" id="error-contato-nome"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="input-contato-email">E-mail</label>
+            <input type="email" id="input-contato-email" placeholder="Digite seu melhor e-mail" required>
+            <span class="error-message" id="error-contato-email"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="input-contato-mensagem">Mensagem</label>
+            <textarea id="input-contato-mensagem" rows="4" placeholder="Escreva sua mensagem aqui..." required></textarea>
+            <span class="error-message" id="error-contato-mensagem"></span>
+          </div>
+
+          <button type="submit" class="submit-btn">Enviar Mensagem</button>
+
+          <div class="success-message" id="success-contato" style="display: none;">
+            🚀 Mensagem enviada com sucesso! Obrigado pelo contato.
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
