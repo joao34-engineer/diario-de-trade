@@ -75,7 +75,7 @@ Abaixo estão as capturas de tela demonstrando a interface funcional do sistema 
 *Interface de registro de trade e observações do replay de mercado.*
 
 ### 2. Histórico de Trades Cadastrados
-![Histórico de Trades](./src/public/assets/screenshots/MAPA-image2.png)
+![Histórico de Trades](./src/public/assets/screenshots/MAPA-image2_final.png)
 *Histórico de cartões de operações em formato de cards detalhados.*
 
 ### 3. Painel de Análise Estatística (Gráficos)
