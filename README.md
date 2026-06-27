@@ -67,10 +67,28 @@ O projeto foi totalmente desacoplado para respeitar o princípio da responsabili
 
 ## 📸 5. Capturas de Tela do Resultado Final
 
-### Visão Geral do Dashboard (Aba Registro)
-![Dashboard de Registro](./src/public/assets/screenshots/dashboard_registro.png)
-*Painel principal focado em usabilidade móvel para inserção rápida de registros de trade.*
+Abaixo estão as capturas de tela demonstrando a interface funcional do sistema em diferentes contextos operacionais:
 
-### Análise Estatística (Aba Estatísticas)
-![Estatísticas de Performance](./src/public/assets/screenshots/dashboard_graficos.png)
-*Gráficos gerados dinamicamente analisando os pontos por região e taxa de acerto por comportamento.*
+### 1. Tela de Registro de Operações
+![Registro de Operações](./src/public/assets/screenshots/MAPA-image1.png)
+*Interface de registro de trade e observações do replay de mercado.*
+
+### 2. Histórico de Trades Cadastrados
+![Histórico de Trades](./src/public/assets/screenshots/MAPA-image2.png)
+*Histórico de cartões de operações em formato de cards detalhados.*
+
+### 3. Painel de Análise Estatística (Gráficos)
+![Estatísticas](./src/public/assets/screenshots/MAPA-image3.png)
+*Análise de performance com gráficos de barras verticais (pontos acumulados por região de preço) e horizontais (assertividade por agressão).*
+
+### 4. Área de Configurações e Backup
+![Configurações](./src/public/assets/screenshots/MAPA-image4.png)
+*Ferramentas de backup locais para download e upload das operações via arquivo JSON.*
+
+### 5. Formulário de Contato
+![Formulário de Contato](./src/public/assets/screenshots/MAPA-image5.png)
+*Interface da aba Fale Conosco para suporte e envio de feedbacks.*
+
+### 6. Sistema de Validação de Erros Reativa
+![Validação de Erros](./src/public/assets/screenshots/MAPA-image6.png)
+*Feedback visual em tempo de digitação (UX premium) para formulários inconsistentes.*
